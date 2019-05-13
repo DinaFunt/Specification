@@ -1,18 +1,7 @@
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-
-//        String s = "kek.txt";
-
-        Structure struct = new Structure(s);
-        struct.typeOfStructure();
+        Structure struct = new Structure(args[0]);
+        System.out.println(struct.typeOfStructure());
     }
-
-
-
-
 }

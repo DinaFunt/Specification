@@ -27,22 +27,11 @@ public class Structure {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(1);
         }
 
         return res;
     }
-
-/*
-    private void printTable() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                System.out.print(table[i][j] + " ");
-            }
-
-            System.out.println();
-        }
-    }
-*/
 
     private boolean isClosedSet() {
         for (int i = 0; i < size; i++) {
@@ -83,9 +72,9 @@ public class Structure {
     }
 
     private boolean hasNeutr() {
-        boolean flag = true;
-
         for (int i = 0; i < size; i++) {
+            boolean flag = true;
+
             for (int j = 0; j < size; j++) {
                 if (table[i][j] != j || table[j][i] != j) {
                     flag = false;
@@ -96,54 +85,47 @@ public class Structure {
             if (flag) {
                 e = i;
                 return true;
-            } else {
-                flag = true;
             }
         }
-
         return false;
     }
 
     private boolean hasInverse() {
-        boolean flag = false;
-
         for (int i = 0; i < size; i++) {
+            boolean flag = false;
+
             for (int j = 0; j < size; j++) {
                 if (table[i][j] == e && table[j][i] == e) {
                     flag = true;
+                    break;
                 }
             }
 
             if (!flag) {
                 return false;
             }
-
-            flag = false;
         }
-
         return true;
-
     }
 
-    public void typeOfStructure() {
+    public TypeOfStructure typeOfStructure() {
 
         if (!isClosedSet()) {
-            System.out.println(TypeOfStructure.Nothing);
-            return;
+            return TypeOfStructure.Nothing;
         }
 
         if (hasNeutr() && hasInverse() && isCommutative() && isAssociative()) {
-            System.out.println(TypeOfStructure.AbelianGroup);
+            return TypeOfStructure.AbelianGroup;
         } else if (hasNeutr() && isCommutative() && isAssociative()) {
-            System.out.println(TypeOfStructure.CommutativeMonoid);
+            return TypeOfStructure.CommutativeMonoid;
         } else if (hasNeutr() && hasInverse() && isAssociative()) {
-            System.out.println(TypeOfStructure.Group);
+            return TypeOfStructure.Group;
         } else if (isAssociative() && hasNeutr()) {
-            System.out.println(TypeOfStructure.Monoid);
+            return TypeOfStructure.Monoid;
         } else if (isAssociative()) {
-            System.out.println(TypeOfStructure.Semigroup);
+            return TypeOfStructure.Semigroup;
         } else {
-            System.out.println(TypeOfStructure.Magma);
+            return TypeOfStructure.Magma;
         }
     }
 }
